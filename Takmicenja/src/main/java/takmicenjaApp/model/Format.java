@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class Format {
 	@Column
 	private int brojUcesnika;
 	
-	@OneToMany(mappedBy="format")
+	@OneToMany(mappedBy="format",fetch = FetchType.LAZY)
 	private List<Takmicenje> takmicenja = new ArrayList<>();
 
 	public Format() {

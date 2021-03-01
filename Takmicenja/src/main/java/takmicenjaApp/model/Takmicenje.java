@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Takmicenje {
 	@ManyToOne
 	private Format format;
 	
-	@OneToMany(mappedBy="takmicenje", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="takmicenje", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Prijava> prijave = new ArrayList<>();
 
 	public Takmicenje() {

@@ -22,8 +22,8 @@ public class PrijavaToPrijavaDto implements Converter<Prijava, PrijavaDTO>{
 		prijavaDTO.setKontakt(source.getKontakt());
 		prijavaDTO.setDrzavaTakmicara(source.getDrzavaTakmicara());
 		prijavaDTO.setDatumPrijave(source.getDatumPrijave());
-		
 		prijavaDTO.setTakmicenje(toTakmicenjeDto.convert(source.getTakmicenje()));
+		
 		return prijavaDTO;
 	}
 	

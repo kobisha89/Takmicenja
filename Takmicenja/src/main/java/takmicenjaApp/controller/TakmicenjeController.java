@@ -39,6 +39,7 @@ public class TakmicenjeController {
 	@Autowired
 	private TakmicenjeDtoToTakmicenje toTakmicenje;
 	
+//	@PreAuthorize("hasAnyRole('KORISNIK', 'ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<TakmicenjeDTO>> getAll(@RequestParam(required=false) String mestoOdrzavanja,
 			@RequestParam(required=false) Long formatId,
@@ -53,6 +54,7 @@ public class TakmicenjeController {
 	
 	}
 	
+//	@PreAuthorize("hasAnyRole('KORISNIK', 'ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity <TakmicenjeDTO> get(@PathVariable Long id) {
 		Takmicenje takmicenje = takmicenjeService.findOne(id);
@@ -64,6 +66,7 @@ public class TakmicenjeController {
         }
 	}
 	
+//	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity <TakmicenjeDTO> create (@Valid @RequestBody TakmicenjeDTO takmicenjeDTO) {
 		Takmicenje takmicenje = toTakmicenje.convert(takmicenjeDTO);
@@ -72,6 +75,7 @@ public class TakmicenjeController {
 		return new ResponseEntity<>(toTakmicenjeDto.convert(sacuvanTakmicenje), HttpStatus.CREATED);
 	}
 	
+//	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping(value = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TakmicenjeDTO> update(@PathVariable Long id, @Valid @RequestBody TakmicenjeDTO takmicenjeDTO){
 
@@ -85,6 +89,7 @@ public class TakmicenjeController {
         return new ResponseEntity<>(toTakmicenjeDto.convert(sacuvanTakmicenje),HttpStatus.OK);
     }
 	
+//	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
 		Takmicenje obrisanTakmicenje = takmicenjeService.delete(id);

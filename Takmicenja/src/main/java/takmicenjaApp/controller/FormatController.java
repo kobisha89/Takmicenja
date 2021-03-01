@@ -25,6 +25,7 @@ public class FormatController {
 	@Autowired
 	private FormatToFormatDto toFormatDto;
 	
+//	@PreAuthorize("hasAnyRole('KORISNIK', 'ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<FormatDTO>> getAll () {
 		
