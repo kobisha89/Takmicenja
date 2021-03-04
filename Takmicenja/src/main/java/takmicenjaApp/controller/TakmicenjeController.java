@@ -39,7 +39,6 @@ public class TakmicenjeController {
 	@Autowired
 	private TakmicenjeDtoToTakmicenje toTakmicenje;
 	
-//	@PreAuthorize("hasAnyRole('KORISNIK', 'ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<TakmicenjeDTO>> getAll(@RequestParam(required=false) String mestoOdrzavanja,
 			@RequestParam(required=false) Long formatId,
