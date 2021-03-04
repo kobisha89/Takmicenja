@@ -9,6 +9,10 @@ import Login from './components/login/Login';
 import Takmicenje from './components/takmicenje/Takmicenje';
 import AddTakmicenje from './components/takmicenje/AddTakmicenje';
 import Prijava from './components/prijave/Prijava';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from 'redux-thunk';
+import reducers from './reducers';
 
 class App extends React.Component{
     render() {
@@ -44,7 +48,11 @@ class App extends React.Component{
 
 }
 
+let storeEnhancer = applyMiddleware(thunk);
+
 ReactDOM.render(
-    <App/>,
-    document.querySelector('#root')
+ <Provider store={createStore(reducers, storeEnhancer)}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
 );

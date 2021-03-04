@@ -1,6 +1,8 @@
 import React from 'react';
 import Axios from '../../apis/Axios';
 import {Table, Button, Form} from 'react-bootstrap'
+import getFormatiAction from "../../actions/GetFormati";
+import { connect } from "react-redux";
 
 class Takmicenje extends React.Component {
 
@@ -18,7 +20,7 @@ class Takmicenje extends React.Component {
     }
 
     componentDidMount() {
-        this.getFormati();
+        this.props.getFormati();
         this.getTakmicenja(0);
     }
 
@@ -129,15 +131,15 @@ class Takmicenje extends React.Component {
         return (
             <div>
                 <h1>Takmicenja</h1>
-                <Button className="btn btn-primary" type="submit" onClick = {() => this.addTakmicenje()}>Add task</Button><br/>
+                <Button className="btn btn-primary" type="submit" onClick = {() => this.addTakmicenje()}>Dodaj takmicenje</Button><br/>
                 <Form>
                     <Form.Label htmlFor="tmestoOdrzavanja">Mesto Odrzavanja</Form.Label><br/>
                     <Form.Control id="tmestoOdrzavanja" name="mestoOdrzavanja" type="text" onChange={(e) => this.searchValueChange(e)}/><br/>
-                    <Form.Label htmlFor="tformatId">Sprint</Form.Label><br/>
+                    <Form.Label htmlFor="tformatId">Format</Form.Label><br/>
                     <Form.Control as="select" id="tformatId" name="formatId" onChange={(e) => this.searchValueChange(e)}>
                     <option></option>
                     {
-                        this.state.formati.map((format) => {
+                        this.props.formati.map((format) => {
                             return (
                                 <option key={format.id} value={format.id}>
                                     {format.tip}
@@ -175,4 +177,12 @@ class Takmicenje extends React.Component {
         )
     }
 }
-export default Takmicenje;
+
+const mapStateToProps = (state, ownProps) => {
+    // console.log(state);
+    return { formati: state.formati };
+  };
+  
+  export default connect(mapStateToProps, {
+    getFormati: getFormatiAction,
+  })(Takmicenje);

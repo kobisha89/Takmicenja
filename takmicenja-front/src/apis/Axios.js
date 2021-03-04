@@ -4,6 +4,18 @@ var Axios = axios.create({
     baseURL: 'http://localhost:8080/api'
 });
 
+export const getFormati = async () => {
+  try {
+    let response = await Axios.get('/formati');
+    return response.data;
+
+   }
+    catch (err) {
+      console.log(err);
+      return [];
+  }
+}
+
 Axios.interceptors.request.use(
     function success(config){
       const token = window.localStorage['jwt'];

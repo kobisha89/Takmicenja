@@ -1,6 +1,8 @@
 import React from 'react';
 import Axios from '../../apis/Axios';
 import {Button, Form} from 'react-bootstrap'
+import getFormatiAction from "../../actions/GetFormati";
+import { connect } from "react-redux";
 
 class AddTakmicenje extends React.Component {
 
@@ -20,7 +22,7 @@ class AddTakmicenje extends React.Component {
     }
 
     componentDidMount(){
-        this.getFormati();
+        this.props.getFormati();
     }
 
     getFormati() {
@@ -52,7 +54,7 @@ class AddTakmicenje extends React.Component {
 
     formatkSelectionChange(e) {
         let formatId = e.target.value;
-        let format = this.state.formati.find((format) => format.id == formatId);
+        let format = this.props.formati.find((format) => format.id == formatId);
         console.log(format)
 
         let tekmicenje = this.state.tekmicenje;
@@ -107,7 +109,7 @@ class AddTakmicenje extends React.Component {
                     <Form.Control as="select" id="tformat" onChange={event => this.formatkSelectionChange(event)}>
                         <option></option>
                         {
-                            this.state.formati.map((format) => {
+                            this.props.formati.map((format) => {
                                 return (
                                     <option key={format.id} value={format.id}>
                                         {format.tip}
@@ -125,4 +127,11 @@ class AddTakmicenje extends React.Component {
 
 }
 
-export default AddTakmicenje;
+const mapStateToProps = (state, ownProps) => {
+    // console.log(state);
+    return { formati: state.formati };
+  };
+  
+  export default connect(mapStateToProps, {
+    getFormati: getFormatiAction,
+  })(AddTakmicenje);
